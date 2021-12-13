@@ -2,14 +2,29 @@
 const buttonCreateLetter = document.getElementById('criar-carta');
 const inputLetterText = document.getElementById('carta-texto');
 const outputLetter = document.getElementById('carta-gerada');
-const styleArray = ['newspaper', 'magazine1', 'magazine2', 'medium', 'big', 'reallybig', 'rotateleft', 'rotateright', 'skewleft', 'skewright'];
-const classes = styleArray.length;
+
+/* Função: randomStyleClass
+-- Retorma uma classe de estilo aleatória */
+function randomStyleClass() {
+  const styleArray = [
+    'newspaper',
+    'magazine1',
+    'magazine2',
+    'medium',
+    'big',
+    'reallybig',
+    'rotateleft',
+    'rotateright',
+    'skewleft',
+    'skewright',
+  ];
+  const classes = styleArray.length;
+  const styleClass = styleArray[Math.floor(Math.random() * classes)];
+  return styleClass;
+}
 
 /* Função: createLetter
 -- Gera a carta ao clicar no botão Criar Carta */
-console.log(inputLetterText.value);
-console.log(styleArray[Math.floor(Math.random() * classes)]);
-
 function createLetter() {
   buttonCreateLetter.addEventListener('click', () => {
     const letterContent = inputLetterText.value;
@@ -21,7 +36,7 @@ function createLetter() {
       for (let index = 0; index < arrayWords.length; index += 1) {
         const elementSpan = document.createElement('span');
         elementSpan.innerText = arrayWords[index];
-        elementSpan.classList.add(styleArray[Math.floor(Math.random() * classes)]);
+        elementSpan.classList.add(randomStyleClass());
         outputLetter.appendChild(elementSpan);
       }
     }
