@@ -5,19 +5,22 @@ const outputLetter = document.getElementById('carta-gerada');
 
 /* Função: createLetter
 -- Gera a carta ao clicar no botão Criar Carta */
+console.log(inputLetterText.value);
+
 function createLetter() {
   buttonCreateLetter.addEventListener('click', () => {
-    if (inputLetterText.value !== '' || !inputLetterText.value) {
+    const letterContent = inputLetterText.value;
+    if (letterContent.split(/\s/)[0] === '') {
+      outputLetter.innerText = 'Por favor, digite o conteúdo da carta.';
+    } else {
       outputLetter.innerText = '';
-      const letterContent = inputLetterText.value;
-      const arrayWords = letterContent.split(' ');
+      const arrayWords = letterContent.split(/\s/);
       for (let index = 0; index < arrayWords.length; index += 1) {
         const elementSpan = document.createElement('span');
-        console.log(index);
-        elementSpan.innerHTML = arrayWords[index];
+        elementSpan.innerText = arrayWords[index];
         outputLetter.appendChild(elementSpan);
       }
-    } else outputLetter.innerText = 'por favor, digite o conteúdo da carta.';
+    }
   });
 }
 createLetter();
