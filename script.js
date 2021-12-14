@@ -3,7 +3,7 @@ const buttonCreateLetter = document.getElementById('criar-carta');
 const inputLetterText = document.getElementById('carta-texto');
 const outputLetter = document.getElementById('carta-gerada');
 const letterCount = document.getElementById('carta-contador');
-// const tagSpan = document.querySelector('span');
+const tagSpan = document.getElementsByTagName('span');
 
 /* Função: randomStyleClass
 -- Retorma uma classe de estilo aleatória */
@@ -25,12 +25,15 @@ function randomStyleClass() {
   return styleClass;
 }
 
+/* Função: changeStyleClass
+-- Muda a classe de estilo da palavra quando clicada. */
 function changeStyleClass() {
-  outputLetter.addEventListener('click', () => {
-    for (let index = 0; index < outputLetter.childNodes.length; index += 1) {
-      outputLetter.childNodes[index].className = randomStyleClass();
-    }
-  });
+  for (let index = 0; index < tagSpan.length; index += 1) {
+    tagSpan[index].addEventListener('click', (event) => {
+      const word = event.target;
+      word.className = randomStyleClass();
+    });
+  }
 }
 
 /* Função: createLetter
@@ -46,7 +49,8 @@ function createLetter() {
       for (let index = 0; index < arrayWords.length; index += 1) {
         const elementSpan = document.createElement('span');
         elementSpan.innerText = arrayWords[index];
-        elementSpan.classList.add(randomStyleClass());
+        elementSpan.className = randomStyleClass();
+        changeStyleClass();
         outputLetter.appendChild(elementSpan);
         letterCount.innerText = index + 1;
       }
