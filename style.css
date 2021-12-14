@@ -1,5 +1,37 @@
+body {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+}
+
+header, footer {
+    background-color: #000;
+    color: #fff;
+    padding: 32px;
+}
+
 span {
     display: inline-block;
+}
+
+button, input[type=text] {
+    margin: auto;
+    padding: 10px;
+}
+
+input[type=text] {
+    width: 75%;
+    text-align: center;
+}
+
+#carta-contador, #carta-gerada {
+    height: 50px;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 50px;
 }
 
 .newspaper {
