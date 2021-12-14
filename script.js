@@ -2,6 +2,8 @@
 const buttonCreateLetter = document.getElementById('criar-carta');
 const inputLetterText = document.getElementById('carta-texto');
 const outputLetter = document.getElementById('carta-gerada');
+const letterCount = document.getElementById('carta-contador');
+// const tagSpan = document.querySelector('span');
 
 /* Função: randomStyleClass
 -- Retorma uma classe de estilo aleatória */
@@ -23,6 +25,14 @@ function randomStyleClass() {
   return styleClass;
 }
 
+function changeStyleClass() {
+  outputLetter.addEventListener('click', () => {
+    for (let index = 0; index < outputLetter.childNodes.length; index += 1) {
+      outputLetter.childNodes[index].className = randomStyleClass();
+    }
+  });
+}
+
 /* Função: createLetter
 -- Gera a carta ao clicar no botão Criar Carta */
 function createLetter() {
@@ -38,7 +48,9 @@ function createLetter() {
         elementSpan.innerText = arrayWords[index];
         elementSpan.classList.add(randomStyleClass());
         outputLetter.appendChild(elementSpan);
+        letterCount.innerText = index + 1;
       }
+      changeStyleClass();
     }
   });
 }
