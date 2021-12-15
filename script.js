@@ -3,37 +3,35 @@ const buttonCreateLetter = document.getElementById('criar-carta');
 const inputLetterText = document.getElementById('carta-texto');
 const outputLetter = document.getElementById('carta-gerada');
 const letterCount = document.getElementById('carta-contador');
-const tagSpan = document.getElementsByTagName('span');
+// const tagSpan = document.getElementsByTagName('span');
 
 /* Função: randomStyleClass
 -- Retorma uma classe de estilo aleatória */
-function randomStyleClass() {
-  const styleArray = [
-    'newspaper',
-    'magazine1',
-    'magazine2',
-    'medium',
-    'big',
-    'reallybig',
-    'rotateleft',
-    'rotateright',
-    'skewleft',
-    'skewright',
-  ];
-  const classes = styleArray.length;
-  const styleClass = styleArray[Math.floor(Math.random() * classes)];
-  return styleClass;
+function randomStyleClass(element) {
+  const styleArray = ['newspaper', 'magazine1', 'magazine2'];
+  const sizeArray = ['medium', 'big', 'reallybig'];
+  const rotateArray = ['rotateleft', 'rotateright'];
+  const skewArray = ['skewleft', 'skewright'];
+
+  const styleIndex = styleArray.length;
+  const sizeIndex = sizeArray.length;
+  const rotateIndex = rotateArray.length;
+  const skewIndex = skewArray.length;
+
+  element.classList.add(styleArray[Math.floor(Math.random() * styleIndex)]);
+  element.classList.add(sizeArray[Math.floor(Math.random() * sizeIndex)]);
+  element.classList.add(rotateArray[Math.floor(Math.random() * rotateIndex)]);
+  element.classList.add(skewArray[Math.floor(Math.random() * skewIndex)]);
 }
 
 /* Função: changeStyleClass
 -- Muda a classe de estilo da palavra quando clicada. */
-function changeStyleClass() {
-  for (let index = 0; index < tagSpan.length; index += 1) {
-    tagSpan[index].addEventListener('click', (event) => {
-      const word = event.target;
-      word.className = randomStyleClass();
-    });
-  }
+function changeStyleClass(element) {
+  element.addEventListener('click', () => {
+    const word = element;
+    word.classList = '';
+    randomStyleClass(element);
+  });
 }
 
 /* Função: createLetter
@@ -49,12 +47,11 @@ function createLetter() {
       for (let index = 0; index < arrayWords.length; index += 1) {
         const elementSpan = document.createElement('span');
         elementSpan.innerText = arrayWords[index];
-        elementSpan.className = randomStyleClass();
-        changeStyleClass();
+        randomStyleClass(elementSpan);
+        changeStyleClass(elementSpan);
         outputLetter.appendChild(elementSpan);
         letterCount.innerText = index + 1;
       }
-      changeStyleClass();
     }
   });
 }

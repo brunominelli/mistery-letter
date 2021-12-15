@@ -25,7 +25,7 @@ input[type=text] {
 }
 
 #carta-contador, #carta-gerada {
-    height: 50px;
+    min-height: 50px;
 }
 
 .container {
